@@ -1,19 +1,14 @@
 {
-    "name": "S03-deploy Dev Container",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": ".."
-    },
+    "name": "Mon DevContainer",
+    "dockerFile": "Dockerfile",
+    "context": "..",
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
     },
     "extensions": [
-        "ms-azuretools.vscode-docker",
-        "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-        "svelte.svelte-vscode"
+        "esbenp.prettier-vscode"
     ],
-    "forwardPorts": [5173],
     "postCreateCommand": "npm install",
     "remoteUser": "vscode"
 }

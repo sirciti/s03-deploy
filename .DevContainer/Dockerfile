@@ -1,17 +1,7 @@
-# Utiliser une image de base avec Node.js
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:latest
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-20
 
-# Installer les dépendances du projet
-WORKDIR /workspace
-
-# Copier le package.json et le package-lock.json
-COPY package*.json ./
-
-# Installer les dépendances
-RUN npm install
-
-# Copier le reste des fichiers du projet
-COPY . .
-
-# Exposer le port utilisé par Vite
-EXPOSE 5173
+# Optionally install any additional packages
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
