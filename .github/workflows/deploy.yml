@@ -1,37 +1,46 @@
+# @file .github/workflows/deploy.yml
+
+# Nom du workflow pour une identification facile
 name: Deploy to GitHub Pages
 
+# Déclenchement du workflow sur les pushs vers la branche principale
 on:
   push:
     branches: [main]
-    
+
+# Configuration des étapes du job de déploiement
 jobs:
-    build-and-deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        
-        # Installation de Node.js
-        - name: Setup Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '20'
-          
-          # Installation des dépendances
-        - name: Install dependencies
-          run: npm ci
-        
-        # Exécution des tests
-        - name: Run tests
-          run: npm run test
-        
-        # Build de l'application
-        - name: Build
-          run: npm run build
-        
-        # Déploiement sur GitHub Pages
-        - name: Deploy to GitHub Pages
-          uses: JamesIves/github-pages-deploy-action@v4
-          with:
-            branch: gh-pages
-            folder: dist
+  build-and-deploy:
+    # Définir l'environnement de base pour l'exécution (Ubuntu)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape pour cloner le dépôt
+      - uses: actions/checkout@v2
+      
+      # Installation de Node.js (version 20)
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      
+      # Installation des dépendances du projet
+      - name: Install dependencies
+        run: npm ci
+      
+      # Exécution des tests
+      - name: Run tests
+        run: npm run test
+      
+      # Compilation de l'application pour le déploiement
+      - name: Build
+        run: npm run build
+      
+      # Déploiement sur GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.1.5
+        with:
+          branch: gh-pages # Branche cible pour GitHub Pages
+          folder: dist     # Dossier de sortie généré par Vite
+
             
